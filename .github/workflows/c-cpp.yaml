@@ -1,7 +1,9 @@
 name: C_C++_CI
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -29,7 +31,7 @@ jobs:
       env:
         cmake_version: ${{ matrix.cmake_version }}
         gcc_version: ${{ matrix.gcc_version }}
-        CPP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CPP_GITHUB_TOKEN: ${{ secrets.CPP_GITHUB_TOKEN }}
       run: .github/workflows/scripts/build_and_test.sh
     - uses: codecov/codecov-action@v1
       with:
